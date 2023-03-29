@@ -3,6 +3,7 @@
 #SBATCH --ntasks=1
 #SBATCH --time=4:00:00
 #SBATCH --job-name=HP_gen
+#SBATCH -o HP_gen.%J
 
 module load python/3.8.3
 

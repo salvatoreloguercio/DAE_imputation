@@ -7,7 +7,7 @@ import random #masking
 import timeit #measure runtime
 
 
-def make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, act_arr, learning_rate_arr, gamma_arr, opt_array, loss_arr, hs_arr, lb_array, rb_array, kp_arr, N,flname):
+def make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, flip_alpha_arr, inv_alpha_arr, learning_rate_arr, act_arr, opt_array, loss_arr, n_layers_arr, size_ratio_arr, decay_rate_arr, batch_size_arr, N,flname):
     print("Building grid search combinations.")
 
     grid = [l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, flip_alpha_arr, inv_alpha_arr, learning_rate_arr, act_arr, opt_array, loss_arr, n_layers_arr, size_ratio_arr, decay_rate_arr, batch_size_arr]
