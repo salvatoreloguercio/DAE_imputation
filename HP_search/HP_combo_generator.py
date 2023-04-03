@@ -39,23 +39,46 @@ def make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, f
 
 #############
 
+# Ist attempt - blew up memory (up to 772Gb!)
 # loss: FL
-l1_arr = [1e-1,1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8,0]
-l2_arr = [1e-1,1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8,0]
-beta_arr = [0,1e-1,1e-2,1e-3,1,5]
-rho_arr = [0.005, 0.01, 0.05, 0.1, 0.25, 0.5]
+# l1_arr = [1e-1,1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8,0]
+# l2_arr = [1e-1,1e-2,1e-3,1e-4,1e-5,1e-6,1e-7,1e-8,0]
+# beta_arr = [0,1e-1,1e-2,1e-3,1,5]
+# rho_arr = [0.005, 0.01, 0.05, 0.1, 0.25, 0.5]
+# gamma_arr = [0,0.5,1,3,5,7]
+# dis_alpha_arr = [0,1]
+# flip_alpha_arr = [0,1]
+# inv_alpha_arr = [0,1]
+# learning_rate_arr = [1e-1,1e-2,1e-3,1e-4,1e-5]
+# act_arr = ['relu', 'tanh', 'sigmoid']
+# opt_array = ['adam', 'sgd', 'radam']
+# loss_arr = "FL"
+# n_layers_arr = [2,4,6,8,10]
+# size_ratio_arr = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.25]
+# decay_rate_arr = [0.0, 1e-4, 1e-3, 1e-2, 0.1]
+# batch_size_arr = [64,128,256,512]
+###
+
+# 2st attempt - less parameters
+
+# loss: FL
+l1_arr = [1e-2,1e-5,1e-7,0]
+l2_arr = [1e-2,1e-5,1e-7,0]
+beta_arr = [0,1e-3,1,3,5]
+rho_arr = [0.01,0.25,0.5,0.75,0.99]
 gamma_arr = [0,0.5,1,3,5,7]
 dis_alpha_arr = [0,1]
 flip_alpha_arr = [0,1]
 inv_alpha_arr = [0,1]
-learning_rate_arr = [1e-1,1e-2,1e-3,1e-4,1e-5]
+learning_rate_arr = [1e-2,1e-3,1e-4,1e-5]
 act_arr = ['relu', 'tanh', 'sigmoid']
 opt_array = ['adam', 'sgd', 'radam']
 loss_arr = "FL"
-n_layers_arr = [2,4,6,8,10]
-size_ratio_arr = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.25]
-decay_rate_arr = [0.0, 1e-4, 1e-3, 1e-2, 0.1]
+n_layers_arr = [2,4,6,8,10,12]
+size_ratio_arr = [1.0, 0.9, 0.8, 0.7, 0.5, 0.3]
+decay_rate_arr = [0.0,1e-8,1e-6,1e-5,0.4]
 batch_size_arr = [64,128,256,512]
+
 
 make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, flip_alpha_arr, inv_alpha_arr, learning_rate_arr, act_arr, opt_array, loss_arr, n_layers_arr, size_ratio_arr, decay_rate_arr, batch_size_arr,500000,"FL")
 
