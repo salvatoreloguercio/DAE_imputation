@@ -24,7 +24,7 @@ def make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, f
     #open(file_name, "w").close()
 
     with open(file_name, "w") as f:
-        f.write("L1 L2 beta rho gamma disable_alpha flip_alpha inverse_alpha learn_rate activation optimizer loss_type n_layers size_ratio decay_rate batch_size")
+        f.write("L1 L2 beta rho gamma disable_alpha flip_alpha inverse_alpha learn_rate activation optimizer loss_type n_layers size_ratio decay_rate batch_size\n")
     f.close()
 
     while idx < len(list_of_random_items):
@@ -73,7 +73,7 @@ inv_alpha_arr = [0,1]
 learning_rate_arr = [1e-2,1e-3,1e-4,1e-5]
 act_arr = ['relu', 'tanh', 'sigmoid']
 opt_array = ['adam', 'sgd', 'radam']
-loss_arr = "FL"
+loss_arr = ["FL"]
 n_layers_arr = [2,4,6,8,10,12]
 size_ratio_arr = [1.0, 0.9, 0.8, 0.7, 0.5, 0.3]
 decay_rate_arr = [0.0,1e-8,1e-6,1e-5,0.4]
@@ -83,11 +83,11 @@ batch_size_arr = [64,128,256,512]
 make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, flip_alpha_arr, inv_alpha_arr, learning_rate_arr, act_arr, opt_array, loss_arr, n_layers_arr, size_ratio_arr, decay_rate_arr, batch_size_arr,500000,"FL")
 
 # loss: CE
-gamma_arr = 0
-dis_alpha_arr = 1
-flip_alpha_arr = 0
-inv_alpha_arr = 0
-loss_arr = "CE"
+gamma_arr = [0]
+dis_alpha_arr = [1]
+flip_alpha_arr = [0]
+inv_alpha_arr = [0]
+loss_arr = ["CE"]
 
 make_new_grid(l1_arr, l2_arr, beta_arr, rho_arr, gamma_arr, dis_alpha_arr, flip_alpha_arr, inv_alpha_arr, learning_rate_arr, act_arr, opt_array, loss_arr, n_layers_arr, size_ratio_arr, decay_rate_arr, batch_size_arr,500000,"CE")
 
