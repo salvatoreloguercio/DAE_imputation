@@ -25,7 +25,7 @@ def get_model(n_inputs, n_outputs):
     model.add(Dense(60, input_dim=n_inputs, kernel_initializer='he_uniform', activation='relu'))
     model.add(Dense(n_outputs))
     model.compile(loss='mae', optimizer='adam')
- return model
+    return model
 
 
  # evaluate a model using repeated k-fold cross-validation
