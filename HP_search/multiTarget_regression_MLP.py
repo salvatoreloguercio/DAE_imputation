@@ -48,7 +48,7 @@ def evaluate_model(X, y):
         # store result
         print('>%.3f' % mae)
         results.append(mae)
-     return results
+    return results
 
 
 # evaluate model
