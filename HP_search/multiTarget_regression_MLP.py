@@ -37,8 +37,8 @@ def evaluate_model(X, y):
     # enumerate folds
     for train_ix, test_ix in cv.split(X):
         # prepare data
-        X_train, X_test = X[train_ix], X[test_ix]
-        y_train, y_test = y[train_ix], y[test_ix]
+        X_train, X_test = X.iloc[train_ix,:], X.iloc[test_ix,:]
+        y_train, y_test = y.iloc[train_ix,:], y.iloc[test_ix,:]
         # define model
         model = get_model(n_inputs, n_outputs)
         # fit model
