@@ -13,4 +13,4 @@ module load tensorflow
 
 cd /gpfs/group/torkamani/loguerci/INCITE
 
-python multiTarget_regression_MLP.py
+python $1
