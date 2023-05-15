@@ -29,7 +29,7 @@ while read tile_err; do
     cd /mnt/stsi/stsi6/Internal/INCITE/II_testing/chr$chr/$tile_err
     rclone copy dropbox:Torkamani_Lab/archive/INCITE/chr${chr}/${tile_err}/IMPUTATOR${best_trial} IMPUTATOR${best_trial} --transfers 5 --dropbox-chunk-size 128M --log-file=/mnt/stsi/stsi6/Internal/INCITE/II_testing/rclone_logs_recov/${tile_prefix}_rclone.log
     echo "${tile_err}\t${best_trial}\t$i"
-    echo -e "${tile_err}\t${best_trial}\t$i" >> tiles_recovered.txt
+    echo -e "${tile_err}\t${best_trial}\t$i" >> /mnt/stsi/stsi6/Internal/INCITE/II_testing/tiles_recovered.txt
   fi
 
 
