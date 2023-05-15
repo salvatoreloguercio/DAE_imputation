@@ -8,9 +8,7 @@ while read tile; do
 
     tile_prefix=$(echo ${tile} | cut -d '/' -f2)
 
-    
-
-   rclone copy dropbox:Torkamani_Lab/archive/INCITE/${tile}/IMPUTATOR${best} IMPUTATOR${best} --transfers 5 --dropbox-chunk-size 128M --log-file=/mnt/stsi/stsi6/Internal/INCITE/II_testing/rclone_logs/${tile_prefix}_rclone.log
+   rclone copy dropbox:Torkamani_Lab/archive/INCITE/${tile} . --transfers 5 --dropbox-chunk-size 128M --include-from /mnt/stsi/stsi6/Internal/INCITE/II_testing/include.txt --log-file=/mnt/stsi/stsi6/Internal/INCITE/II_testing/rclone_chr2/${tile_prefix}_rclone.log
 
 done < $1
 
