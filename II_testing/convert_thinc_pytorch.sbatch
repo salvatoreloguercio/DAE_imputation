@@ -15,13 +15,15 @@ echo $PYTHONPATH
 
 script=/mnt/stsi/stsi6/Internal/INCITE/II_testing/genomeai/convert.py
 
-while read tile; do
+while read model; do
+
+tile=$(dirname $model)
 
 cd $tile
 
-echo $tile | cut -d "/" -f 8-9
+echo $model | cut -d "/" -f 8-9
 
-best=$( basename $tile | sed -e "s/IMPUTATOR//g" )
+best=$( basename $model | sed -e "s/IMPUTATOR//g" )
 
 #best=$(cat summary.csv | sort -k3g -t',' | tail -n 1 | cut -f 2 -d ',')
 python $script IMPUTATOR${best} torch IMPUTATOR${best}/model_${best}
