@@ -6,12 +6,12 @@
 #SBATCH -J thinc2pth
 #SBATCH -o thinc2pth.%J
 
-PYTHONPATH=$PYTHONPATH:/mnt/stsi/stsi6/Internal/INCITE/II_testing
-
-echo $PYTHONPATH
 
 module load pytorch/1.11.1py38-cuda
 
+PYTHONPATH=$PYTHONPATH:/mnt/stsi/stsi6/Internal/INCITE/II_testing
+
+echo $PYTHONPATH
 
 script=/mnt/stsi/stsi6/Internal/INCITE/II_testing/genomeai/convert.py
 
