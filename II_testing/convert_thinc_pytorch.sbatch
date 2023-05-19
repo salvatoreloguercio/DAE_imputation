@@ -1,7 +1,8 @@
 #!/bin/bash -l
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --partition=gpu
+#SBATCH --partition=stsi
+#SBATCH --gpus=v100:1
 #SBATCH --time=72:00:00
 #SBATCH -J thinc2pth
 #SBATCH -o thinc2pth.%J
