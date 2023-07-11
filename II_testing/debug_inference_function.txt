@@ -1,0 +1,105 @@
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr1/1_177079441-177168893,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_and_select_best 2_validate_and_select_best.sbatch
+
+/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr1/1_177079441-177168893 /mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg
+
+## debug - run single imputation function
+
+python3 /mnt/stsi/stsi6/Internal/INCITE/II_testing/inference_function_dip_oh.py HRC.r1-1.EGA.GRCh37.chr1.haplotypes.176438551-177750798.m914.3_177079441-177168893.VMV1.gz.1-5 /mnt/stsi/stsi5/raqueld/wellderly/VMV/hg19/validation/EUR/chr1_AXIOM/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz IMPUTATOR40 --model_name model_40 --output inference_output_2/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz.imputed.model_40.vcf
+
+
+bcftools query -f '%CHROM %POS  GTs:[ %GT]\n'
+
+
+
+/mnt/stsi/stsi5/raqueld/wellderly/VMV/hg19/validation/EUR/chr1_AFFY6/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz
+
+/mnt/stsi/stsi5/raqueld/wellderly/VMV/hg19/validation/EUR/chr1_AXIOM/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz
+
+
+# DEBUG - run on another tile
+
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr4/4_92639091-92692882,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_and_select_best 2_validate_and_select_best.sbatch
+
+# DEBUG - run on HG
+
+srun --ntasks=1 --cpus-per-task=1 --partition=gpu --gpus=a100:1 --mem=40gb -t 60 --pty bash -i
+
+module load conda
+conda activate thinc # /blue/raquel.dias/share/conda/envs/thinc
+module load bcftools
+module load samtools
+
+
+imputator=/blue/raquel.dias/data/imputator/imputator_package_thinc/genomeai/inference_function_dip_oh_pytorch.py
+python $imputator --model_name model_40 --output test.vcf HRC.r1-1.EGA.GRCh37.chr1.haplotypes.176438551-177750798.m914.3_177079441-177168893.VMV1.gz.1-5 Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz IMPUTATOR40 --use_gpu
+
+
+# run on 10 random tiles
+
+chr1/1_229075683-229114355
+chr2/2_155390819-155640134
+chr3/3_59999827-60017641
+chr5/5_155372992-155457398
+chr6/6_125677583-125715532
+chr7/7_154507844-154553457
+chr10/10_129248511-129321809
+chr11/11_19550662-19569808
+chr12/12_127874466-127901679
+chr14/14_31276993-31348327
+
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr1/1_229075683-229114355,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_test1 2_validate_and_select_best.sbatch
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr3/3_59999827-60017641,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_test2 2_validate_and_select_best.sbatch
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr6/6_125677583-125715532,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_test3 2_validate_and_select_best.sbatch
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr10/10_129248511-129321809,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_test4 2_validate_and_select_best.sbatch
+sbatch --export=mdir=/mnt/stsi/stsi6/Internal/INCITE/II_testing/chr12/12_127874466-127901679,input=/mnt/stsi/stsi6/Internal/INCITE/II_testing/input.cfg --job-name=2_validate_test5 2_validate_and_select_best.sbatch
+
+# debug last one
+
+/mnt/stsi/stsi5/raqueld/MESA/VMV/hg19/validation/ALL/chr12_OMNI1M/MESA_phs001416_TOPMed_WGS_freeze.8.hg38.hg19.concat.rename.bi.dense.lifted_hg38_to_hg19.GH.ancestry-1.chr12.phased.127874466-127901679.vcf.VMV1.masked.gz # MESA (working)
+
+python3 /mnt/stsi/stsi6/Internal/INCITE/II_testing/inference_function_dip_oh.py HRC.r1-1.EGA.GRCh37.chr12.haplotypes.127874466-127901679.vcf.VMV1.gz.1-5 /mnt/stsi/stsi5/raqueld/HGDP/VMV/hg19/validation/ALL/chr12_OMNI1M/hgdp_wgs.20190516.statphase.autosomes.chr12.hg19.concat.rename.bi.dense.127874466-127901679.vcf.VMV1.masked.gz IMPUTATOR212 --model_name model_212 --output inference_output_6/hgdp_wgs.20190516.statphase.autosomes.chr12.hg19.concat.rename.bi.dense.127874466-127901679.vcf.VMV1.masked.gz.imputed.model_212.vcf
+
+
+# try replacing / with | in missing instances - if would fix the error
+
+cp /mnt/stsi/stsi5/raqueld/wellderly/VMV/hg19/validation/EUR/chr1_AXIOM/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz test_original.VMV.masked.gz
+
+zcat test_original.VMV.masked.gz | sed '/^##/! s/\//|/g' > test_replaced.masked
+
+zcat test_original.VMV.masked.gz | sed '/^##/! s/\.\/\./0|0/g' > test_replaced_0.masked
+
+# grep -E "\.\/\." 
+
+bgzip -c test_replaced.masked > test_replaced.masked.gz
+
+python3 /mnt/stsi/stsi6/Internal/INCITE/II_testing/inference_function_dip_oh.py HRC.r1-1.EGA.GRCh37.chr1.haplotypes.176438551-177750798.m914.3_177079441-177168893.VMV1.gz.1-5 /mnt/stsi/stsi5/raqueld/wellderly/VMV/hg19/validation/EUR/chr1_AXIOM/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz IMPUTATOR40 --model_name model_40 --output inference_output_2/Wellderly.chrALL.g.lifted_hg19_to_GRCh37.GH.ancestry-1.chr1.phased.176438551-177750798.m914.3_177079441-177168893.VMV1.masked.gz.imputed.model_40.vcf
+
+cd chr1/1_177079441-177168893
+python3 /mnt/stsi/stsi6/Internal/INCITE/II_testing/inference_function_dip_oh.py HRC.r1-1.EGA.GRCh37.chr1.haplotypes.176438551-177750798.m914.3_177079441-177168893.VMV1.gz.1-5 test_replaced.masked.gz IMPUTATOR40 --model_name model_40 --output inference_output_2/test_imputed.vcf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,9 +22,9 @@ start=`date +%s`
 echo "MESA"
 
 in_d=/mnt/stsi/stsi5/raqueld/MESA/VMV/hg19/validation
-out_d=/mnt/stsi/stsi6/Internal/TOPmed/MESA/VMV/hg19/validation
+out_d=/mnt/stsi/stsi6/Internal/INCITE/II_testing/MESA/VMV/hg19/validation
 
-for ancestry in $(echo "ALL AMR EAS EUR"); do # AFR already done
+for ancestry in $(echo "AFR ALL AMR EAS EUR"); do 
 
   for array in $(echo "AFFY6 AXIOM OMNI1M"); do
 

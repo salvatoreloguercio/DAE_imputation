@@ -1,7 +1,8 @@
 #!/bin/bash -l
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --time=4:00:00
+#SBATCH --mem=90G
+#SBATCH --time=8:00:00
 #SBATCH --job-name=HP_gen
 #SBATCH -o HP_gen.%J
 
