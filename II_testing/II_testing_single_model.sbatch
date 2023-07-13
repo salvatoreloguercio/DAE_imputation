@@ -5,6 +5,7 @@
 #SBATCH --time=6:00:00
 ##SBATCH --job-name=2_validate_and_select_best
 #SBATCH --output=%x.oe%j
+#SBATCH --error=%x.oe%j
 
 
 module load samtools

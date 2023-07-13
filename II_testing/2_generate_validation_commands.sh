@@ -66,14 +66,13 @@ for i in $(grep "^VAL_GA_DIR" $cfg | tr -d ' '); do
         #NOT WORKING IN NEW VERSION
         #cmd1="bash $inference_script IMPUTATOR_$VMV ${VMV}.1-5 $val_root inference_output_$idx > run_inference.sh\n\nparallel -j $N_THREADS < run_inference.sh"
         cmd1="bcftools view -i 'F_MISSING<=0.0' $ga_path -Oz -o $ga_out ; tabix -p vcf -f $ga_out"
-
-
         cmd2="bash $inference_script $IMPUTATOR ${VMV}.1-5 $val_root inference_output_$idx > run_inference.sh\n\nparallel -j $N_THREADS < run_inference.sh"
         cmd3="bash $evaluation_script inference_output_$idx $val_root $val_wgs evaluation_output_$idx > run_evaluation.sh\n\nparallel -j $N_THREADS < run_evaluation.sh"
         tsv_list="evaluation_output_$idx/*model*.*per_variant*.tsv"
     else
         #NOT WORKING IN NEW VERSION
         #cmd1="bash $inference_script IMPUTATOR_$VMV ${VMV}.1-5 $val_root inference_output_$idx  | grep \"_F\.\" > run_inference.sh\n\nparallel -j $N_THREADS < run_inference.sh"
+        cmd1="bcftools view -i 'F_MISSING<=0.0' $ga_path -Oz -o $ga_out ; tabix -p vcf -f $ga_out"
         cmd2="bash $inference_script $IMPUTATOR ${VMV}.1-5 $val_root inference_output_$idx  | grep \"_F\.\" > run_inference.sh\n\nparallel -j $N_THREADS < run_inference.sh"
         cmd3="bash $evaluation_script inference_output_$idx $val_root $val_wgs evaluation_output_$idx  | grep \"_F\.\" > run_evaluation.sh\n\nparallel -j $N_THREADS < run_evaluation.sh"
         tsv_list="evaluation_output_$idx/*model*_F.*per_variant*.tsv"
@@ -120,7 +119,7 @@ for i in $(grep "^VAL_GA_DIR" $cfg | tr -d ' '); do
 
     if [ -z ${3} ]; then
         cmd4="Rscript $plot_script $tsv_list --threshold -1 $custom_files $custom_names --custom_title $custom_title --out_dir plots_$idx"
-        echo -e "$cmd1\n\n$cmd2\n\n$cmd3\n\n"
+        echo -e "$cmd1\n\n$cmd2\n\n$cmd3\n\n$cmd4\n\n"
     else
         cmd4="Rscript $plot_script $tsv_list --threshold -1 $custom_files $custom_names --custom_title $custom_title --out_dir full_training_plots_$idx"
         echo -e "$cmd1\n\n$cmd2\n\n$cmd3\n\n$cmd4\n\n"
