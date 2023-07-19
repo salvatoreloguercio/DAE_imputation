@@ -63,7 +63,7 @@ echo -e "$cmd0\n\n"
     model_name=$(basename IMPUTATOR*/*.pth | sed -e 's/\.pth$//g')
     out_path="$out_dir/${ga_name}.imputed.${model_name}.vcf"
 
-    echo -e "$ga_out\t$out_path" >> GA_list_${model_folder}.tsv
+    echo -e "$ga_out\t$out_path" >> GA_list_$(basename $1).tsv
 done
 
 # run inference once with batch inference function + list
